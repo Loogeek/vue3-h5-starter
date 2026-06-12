@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import type { AppLocale } from '@/locales';
+import { useI18n } from 'vue-i18n';
+import { usePreferencesStoreHook } from '@/store/modules/preferences';
+
 defineOptions({
   name: 'HomePage',
 });
@@ -25,10 +29,15 @@ interface StackItem {
 }
 
 const router = useRouter();
+const { t } = useI18n();
+const preferences = usePreferencesStoreHook();
+const { locale } = storeToRefs(preferences);
 
 const repoUrl = 'https://github.com/Loogeek/vue3-h5-starter';
-const description = 'A Vue 3 mobile H5 starter template with Vite 8, Tailwind CSS v4, Vant 4, Pinia, TanStack Query, built-in examples, and AI-ready conventions.';
-const projectSummary = '面向移动端网页、微信公众号页面和混合 App WebView 的 Vue 3 H5 应用脚手架，内置官网首页、示例页面、数据请求、文件路由和 AI 协作规范。';
+const description = computed(() => t('common.description'));
+const projectSummary = computed(() => t('home.summary'));
+const nextLocale = computed<AppLocale>(() => locale.value === 'zh-CN' ? 'en-US' : 'zh-CN');
+const nextLocaleLabel = computed(() => nextLocale.value === 'zh-CN' ? '中文' : 'English');
 
 const stackItems: StackItem[] = [
   { label: 'Vue 3.5+', icon: 'logos:vue', url: 'https://vuejs.org' },
@@ -39,80 +48,86 @@ const stackItems: StackItem[] = [
   { label: 'Vant 4', icon: 'lucide:blocks', url: 'https://vant-ui.github.io/vant' },
 ];
 
-const examples: LinkItem[] = [
+const examples = computed<LinkItem[]>(() => [
   {
-    label: 'TanStack Query',
-    desc: '列表、详情、创建与缓存刷新示例',
+    label: t('home.examples.queryTitle'),
+    desc: t('home.examples.queryDesc'),
     icon: 'lucide:database',
     path: '/query',
   },
   {
-    label: 'File Routes',
-    desc: '文件路由、动态参数与类型安全跳转',
+    label: t('home.examples.routesTitle'),
+    desc: t('home.examples.routesDesc'),
     icon: 'lucide:route',
     path: '/routes',
   },
   {
-    label: 'Scroll Cache',
-    desc: '列表滚动缓存与页面回退体验',
+    label: t('home.examples.scrollTitle'),
+    desc: t('home.examples.scrollDesc'),
     icon: 'lucide:scroll-text',
     path: '/scroll-cache',
   },
   {
-    label: 'Toolbox',
-    desc: '图标、深色模式、AI 协作与开发工具',
+    label: t('home.examples.toolsTitle'),
+    desc: t('home.examples.toolsDesc'),
     icon: 'lucide:wrench',
     path: '/tools',
   },
-];
-
-const features: FeatureItem[] = [
   {
-    title: 'Mobile-first UI',
-    desc: 'Vant 4 + Tailwind CSS v4，内置视口适配、深色模式和常用移动端页面结构。',
+    label: t('home.examples.docsTitle'),
+    desc: t('home.examples.docsDesc'),
+    icon: 'lucide:book-open-text',
+    path: '/docs',
+  },
+]);
+
+const features = computed<FeatureItem[]>(() => [
+  {
+    title: t('home.features.mobileTitle'),
+    desc: t('home.features.mobileDesc'),
     icon: 'lucide:smartphone',
   },
   {
-    title: 'Modern build chain',
-    desc: 'Vite 8、Rolldown、Oxc、legacy bundle、gzip 压缩和可选 CDN 加速。',
+    title: t('home.features.buildTitle'),
+    desc: t('home.features.buildDesc'),
     icon: 'lucide:rocket',
   },
   {
-    title: 'Data workflow',
-    desc: 'Axios 封装、Mock Dev Server、TanStack Query 缓存和 Pinia 客户端状态。',
+    title: t('home.features.dataTitle'),
+    desc: t('home.features.dataDesc'),
     icon: 'lucide:database-zap',
   },
   {
-    title: 'AI-ready conventions',
-    desc: 'AGENTS、CONSTITUTION、Claude、Cursor、Copilot 和 Vue skills 已经放进项目。',
+    title: t('home.features.conventionTitle'),
+    desc: t('home.features.conventionDesc'),
     icon: 'lucide:bot',
   },
-];
+]);
 
-const introCards: FeatureItem[] = [
+const introCards = computed<FeatureItem[]>(() => [
   {
-    title: '项目定位',
-    desc: '适合作为移动端 H5、新业务活动页、公众号网页和 App 内嵌页面的起步模板。',
+    title: t('home.project.positionTitle'),
+    desc: t('home.project.positionDesc'),
     icon: 'lucide:target',
   },
   {
-    title: '内置能力',
-    desc: '首页、示例页、请求缓存、文件路由、本地 Mock、移动端组件、深色模式和开发调试工具已预置。',
+    title: t('home.project.abilityTitle'),
+    desc: t('home.project.abilityDesc'),
     icon: 'lucide:layers-3',
   },
   {
-    title: '协作规范',
-    desc: '内置 README、AGENTS、CONSTITUTION 和主流 AI 工具入口，便于团队统一开发约定。',
+    title: t('home.project.conventionTitle'),
+    desc: t('home.project.conventionDesc'),
     icon: 'lucide:file-check-2',
   },
-];
+]);
 
-const commands = [
-  { label: 'Install', value: 'pnpm install' },
-  { label: 'Develop', value: 'pnpm dev' },
-  { label: 'Build', value: 'pnpm build' },
-  { label: 'Check', value: 'pnpm lint && pnpm test:run' },
-];
+const commands = computed(() => [
+  { label: t('home.start.install'), value: 'pnpm install' },
+  { label: t('home.start.develop'), value: 'pnpm dev' },
+  { label: t('home.start.build'), value: 'pnpm build' },
+  { label: t('home.start.check'), value: 'pnpm lint && pnpm test:run' },
+]);
 
 const repoTopics = [
   'vue3',
@@ -133,6 +148,10 @@ function openLink(url?: string) {
 function go(path?: string) {
   if (path)
     router.push(path);
+}
+
+function toggleLocale() {
+  preferences.setLocale(nextLocale.value);
 }
 </script>
 
@@ -161,16 +180,24 @@ function go(path?: string) {
               class="!rounded-full !border-[#243b2f]/20 !bg-transparent !px-4 dark:!border-white/20"
               @click="openLink(repoUrl)"
             >
-              GitHub
+              {{ t('common.github') }}
+            </van-button>
+            <van-button
+              size="small"
+              icon="exchange"
+              class="!rounded-full !border-[#243b2f]/20 !bg-white/70 !px-4 dark:!border-white/20 dark:!bg-white/5"
+              @click="toggleLocale"
+            >
+              {{ nextLocaleLabel }}
             </van-button>
           </nav>
 
           <div class="mt-12 md:mt-20">
             <p class="mb-4 inline-flex rounded-full border border-[#243b2f]/15 bg-white px-3 py-1 text-[12px] font-medium text-[#4d6c58] shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-[#c6dcc9]">
-              移动端 H5 应用脚手架
+              {{ t('home.badge') }}
             </p>
             <h1 class="max-w-3xl text-[42px] font-black leading-[46px] tracking-normal md:text-[76px] md:leading-[78px]">
-              Vue3 H5 Starter
+              {{ t('home.title') }}
             </h1>
             <p class="mt-5 max-w-2xl text-[15px] leading-7 text-[#536257] md:text-[17px] dark:text-[#b7c2bb]">
               {{ projectSummary }}
@@ -180,10 +207,10 @@ function go(path?: string) {
             </p>
             <div class="mt-7 flex flex-wrap gap-3">
               <van-button type="primary" icon="play-circle-o" class="!h-11 !rounded-full !bg-[#243b2f] !px-6 !text-white dark:!bg-[#dff8df] dark:!text-[#142118]" @click="go('/query')">
-                View examples
+                {{ t('home.viewExamples') }}
               </van-button>
               <van-button icon="down" class="!h-11 !rounded-full !border-[#243b2f]/20 !bg-white/80 !px-6 dark:!border-white/15 dark:!bg-white/5" @click="openLink(repoUrl)">
-                Use template
+                {{ t('home.useTemplate') }}
               </van-button>
             </div>
           </div>
@@ -208,10 +235,10 @@ function go(path?: string) {
               <div class="flex items-center justify-between border-b border-black/5 px-4 py-3 dark:border-white/10">
                 <div>
                   <p class="text-[12px] font-bold text-[#203528] dark:text-white">
-                    Starter Preview
+                    {{ t('home.previewTitle') }}
                   </p>
                   <p class="text-[10px] text-[#6b786e] dark:text-[#9aa6a0]">
-                    Mobile-first examples
+                    {{ t('home.previewSubtitle') }}
                   </p>
                 </div>
                 <div class="flex gap-1">
@@ -223,10 +250,10 @@ function go(path?: string) {
               <div class="space-y-3 p-4">
                 <div class="rounded-2xl bg-[#243b2f] p-4 text-white">
                   <p class="text-[12px] text-white/70">
-                    Ready stack
+                    {{ t('home.readyStack') }}
                   </p>
                   <p class="mt-1 text-xl font-black">
-                    Build, mock, test, ship.
+                    {{ t('home.buildMockShip') }}
                   </p>
                 </div>
                 <div class="grid grid-cols-2 gap-2">
@@ -242,13 +269,13 @@ function go(path?: string) {
                   </div>
                 </div>
                 <div class="rounded-2xl border border-dashed border-[#3c7d4b]/30 bg-[#eaf5ec] p-3 text-[11px] leading-5 text-[#3d5644] dark:bg-[#1c2821] dark:text-[#c6d6c9]">
-                  Files under <span class="font-bold">src/views</span> become routes automatically.
+                  {{ t('home.routesTip') }}
                 </div>
               </div>
             </div>
           </div>
           <div class="mt-3 text-center text-[11px] text-[#6b786e] dark:text-[#a6b2aa]">
-            Actual examples are available inside this template.
+            {{ t('home.actualExamples') }}
           </div>
         </div>
       </div>
@@ -258,13 +285,13 @@ function go(path?: string) {
       <div class="grid gap-4 md:grid-cols-[1.1fr_1fr]">
         <div>
           <p class="text-[12px] font-bold uppercase text-[#3c7d4b]">
-            Project
+            {{ t('home.project.eyebrow') }}
           </p>
           <h2 class="mt-1 text-2xl font-black">
-            一个可以直接开工的移动端模板
+            {{ t('home.project.title') }}
           </h2>
           <p class="mt-3 text-[13px] leading-6 text-[#657269] dark:text-[#a4afa6]">
-            这个项目不只是空模板，已经把移动端项目的常用起点整理好：官网展示、示例页面、接口请求、状态管理、路由约定、样式方案、调试工具和协作说明。
+            {{ t('home.project.desc') }}
           </p>
         </div>
         <div class="grid gap-3">
@@ -295,15 +322,15 @@ function go(path?: string) {
       <div class="mb-5 flex items-end justify-between gap-4">
         <div>
           <p class="text-[12px] font-bold uppercase text-[#3c7d4b]">
-            Examples
+            {{ t('home.examples.eyebrow') }}
           </p>
           <h2 class="mt-1 text-2xl font-black">
-            Open the built-in demos
+            {{ t('home.examples.title') }}
           </h2>
         </div>
-        <span class="hidden text-[12px] text-[#657269] md:inline dark:text-[#a4afa6]">No backend required for local demos</span>
+        <span class="hidden text-[12px] text-[#657269] md:inline dark:text-[#a4afa6]">{{ t('home.examples.note') }}</span>
       </div>
-      <div class="grid gap-3 md:grid-cols-4">
+      <div class="grid gap-3 md:grid-cols-5">
         <button
           v-for="item in examples"
           :key="item.label"
@@ -321,7 +348,7 @@ function go(path?: string) {
             {{ item.desc }}
           </p>
           <div class="mt-4 flex items-center gap-1 text-[12px] font-bold text-[#326d40] dark:text-[#9ee2a9]">
-            Open
+            {{ t('home.examples.open') }}
             <i-icon icon="lucide:arrow-right" class="text-sm transition group-hover:translate-x-0.5" />
           </div>
         </button>
@@ -349,13 +376,13 @@ function go(path?: string) {
     <section class="mx-auto grid max-w-6xl gap-5 px-5 py-10 md:grid-cols-[1fr_1fr] md:px-8 md:py-14">
       <div>
         <p class="text-[12px] font-bold uppercase text-[#3c7d4b]">
-          Start fast
+          {{ t('home.start.eyebrow') }}
         </p>
         <h2 class="mt-1 text-2xl font-black">
-          Four commands to run locally
+          {{ t('home.start.title') }}
         </h2>
         <p class="mt-3 text-[13px] leading-6 text-[#657269] dark:text-[#a4afa6]">
-          The template is intentionally practical: install with pnpm, run the dev server, build for production, and use the existing checks before shipping changes.
+          {{ t('home.start.desc') }}
         </p>
       </div>
       <div class="rounded-xl bg-[#142118] p-4 text-[#e9f7ec] shadow-xl shadow-[#203528]/10">
@@ -373,10 +400,10 @@ function go(path?: string) {
     <section class="mx-auto max-w-6xl px-5 pb-12 md:px-8 md:pb-16">
       <div class="rounded-xl border border-[#243b2f]/10 bg-white p-5 dark:border-white/10 dark:bg-white/5">
         <p class="text-[12px] font-bold uppercase text-[#3c7d4b]">
-          GitHub About
+          {{ t('home.about.eyebrow') }}
         </p>
         <h2 class="mt-1 text-xl font-black">
-          Recommended repository description
+          {{ t('home.about.title') }}
         </h2>
         <p class="mt-3 text-[13px] leading-6 text-[#657269] dark:text-[#a4afa6]">
           {{ description }}

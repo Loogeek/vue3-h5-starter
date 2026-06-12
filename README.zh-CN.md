@@ -29,6 +29,9 @@
 - Vant 4 移动端组件库
 - Tailwind CSS v4，并支持 `px` 到 `vmin` 的移动端视口适配
 - Pinia 管理客户端状态，TanStack Query 管理服务端状态
+- Pinia 持久化语言和应用偏好
+- Vue I18n 中英文国际化
+- PWA manifest 和 service worker 支持
 - Axios 封装、请求示例和本地 Mock 接口
 - 深色模式、本地 SVG 图标和 Iconify 图标
 - VConsole、Vue DevTools、Code Inspector 开发调试工具
@@ -57,8 +60,11 @@
 
 - [Vue Router](https://router.vuejs.org/) 文件路由
 - [Pinia](https://pinia.vuejs.org/) 状态管理
+- [Vue I18n](https://vue-i18n.intlify.dev/) 国际化
 - [TanStack Query](https://tanstack.com/query/latest/docs/framework/vue/overview) 服务端状态管理
 - [VueUse](https://vueuse.org/) 组合式工具函数
+- [vite-plugin-pwa](https://vite-pwa-org.netlify.app/) PWA 资源和 service worker
+- [pinia-plugin-persistedstate](https://prazdevs.github.io/pinia-plugin-persistedstate/) Store 持久化
 - [vite-plugin-mock-dev-server](https://vite-plugin-mock-dev-server.netlify.app/) 本地 Mock 接口
 - `vite-plugin-vconsole`、`vite-plugin-vue-devtools`、`vite-plugin-compression`、`@vitejs/plugin-legacy`
 
@@ -116,6 +122,7 @@ pnpm preview
 - `/query` - TanStack Query 列表、详情、创建流程
 - `/routes` - 文件路由和动态路由参数
 - `/scroll-cache` - keep-alive 列表滚动恢复
+- `/docs` - 模板文档、命令、能力说明和后续建议
 - `/tools` - 图标、深色模式、AI 协作和开发工具
 
 ### 检查

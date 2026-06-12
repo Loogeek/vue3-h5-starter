@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { AppLocale } from '@/locales';
 import LucideBadgeCheck from '@iconify-icons/lucide/badge-check';
 import LucideHome from '@iconify-icons/lucide/home';
 import LucideMoon from '@iconify-icons/lucide/moon';
@@ -6,7 +7,9 @@ import LucideRoute from '@iconify-icons/lucide/route';
 import LucideSparkles from '@iconify-icons/lucide/sparkles';
 import LucideWrench from '@iconify-icons/lucide/wrench';
 
+import { useI18n } from 'vue-i18n';
 import { useDarkMode, useToggleDarkMode } from '@/hooks/useToggleDarkMode';
+import { usePreferencesStoreHook } from '@/store/modules/preferences';
 import SectionTitle from './components/SectionTitle.vue';
 
 defineOptions({
@@ -14,7 +17,15 @@ defineOptions({
 });
 
 const router = useRouter();
+const { t } = useI18n();
+const preferences = usePreferencesStoreHook();
+const { locale } = storeToRefs(preferences);
 const isDark = computed(() => useDarkMode());
+
+const localeOptions: Array<{ label: string; value: AppLocale }> = [
+  { label: '中文', value: 'zh-CN' },
+  { label: 'English', value: 'en-US' },
+];
 
 // Iconify 在线图标
 const iconOnlineList = [
@@ -79,6 +90,7 @@ const exampleEntries = [
   { label: 'TanStack Query', desc: '缓存 / 去重 / 后台刷新', icon: 'lucide:database', path: '/query', url: 'https://tanstack.com/query' },
   { label: '文件路由', desc: '动态参数 / 类型安全', icon: 'lucide:route', path: '/routes', url: 'https://github.com/posva/unplugin-vue-router' },
   { label: '滚动缓存', desc: '列表回退定位 / 页面缓存示例', icon: 'lucide:scroll-text', path: '/scroll-cache' },
+  { label: '文档页', desc: '能力说明 / 快速开始 / 后续路线', icon: 'lucide:book-open-text', path: '/docs' },
 ];
 
 // 自动导入的 API 列表
@@ -94,6 +106,10 @@ function toggleDark(e: MouseEvent) {
   useToggleDarkMode(e);
 }
 
+function setLocale(localeValue: AppLocale) {
+  preferences.setLocale(localeValue);
+}
+
 function openLink(url?: string) {
   if (url)
     window.open(url, '_blank');
@@ -103,7 +119,7 @@ function openLink(url?: string) {
 <template>
   <div class="px-4 pt-3 pb-6">
     <!-- 功能演示 -->
-    <SectionTitle icon="lucide:play-circle" title="功能演示" />
+    <SectionTitle icon="lucide:play-circle" :title="t('tools.demo')" />
     <div class="space-y-2">
       <div
         v-for="entry in exampleEntries"
@@ -129,6 +145,53 @@ function openLink(url?: string) {
           </p>
         </div>
         <i-icon icon="lucide:chevron-right" class="text-sm text-gray-300" />
+      </div>
+    </div>
+
+    <!-- 外观与偏好 -->
+    <SectionTitle icon="lucide:sliders-horizontal" :title="t('tools.appearance')" />
+    <div class="space-y-2">
+      <div class="p-3 rounded-xl border border-[color:var(--color-border)] bg-[var(--color-block-background)]">
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <p class="text-[13px] font-medium">
+              {{ t('locale.title') }}
+            </p>
+            <p class="text-[11px] text-gray-400 mt-0.5">
+              {{ t('locale.description') }}
+            </p>
+          </div>
+          <div class="flex rounded-full bg-gray-100 p-1 dark:bg-gray-800">
+            <button
+              v-for="item in localeOptions"
+              :key="item.value"
+              type="button"
+              class="h-8 rounded-full px-3 text-[12px] font-medium transition"
+              :class="locale === item.value ? 'bg-white text-[#243b2f] shadow-sm dark:bg-[#dff8df]' : 'text-gray-500 dark:text-gray-300'"
+              @click="setLocale(item.value)"
+            >
+              {{ item.label }}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="grid gap-2 md:grid-cols-2">
+        <div class="rounded-xl border border-[color:var(--color-border)] bg-[var(--color-block-background)] p-3">
+          <p class="text-[13px] font-medium">
+            {{ t('tools.persistence') }}
+          </p>
+          <p class="mt-1 text-[11px] leading-4 text-gray-400">
+            {{ t('tools.persistenceDesc') }}
+          </p>
+        </div>
+        <div class="rounded-xl border border-[color:var(--color-border)] bg-[var(--color-block-background)] p-3">
+          <p class="text-[13px] font-medium">
+            {{ t('tools.pwa') }}
+          </p>
+          <p class="mt-1 text-[11px] leading-4 text-gray-400">
+            {{ t('tools.pwaDesc') }}
+          </p>
+        </div>
       </div>
     </div>
 
@@ -294,7 +357,7 @@ function openLink(url?: string) {
       </p>
       <div class="grid grid-cols-2 gap-2">
         <div class="flex items-center gap-2 p-2 rounded-lg bg-blue-50 dark:bg-blue-900/20 active:opacity-70" @click="openLink('https://vant-ui.github.io/vant')">
-          <img src="https://fastly.jsdelivr.net/npm/@vant/assets/logo.png" class="size-5 rounded-xs shrink-0" alt="">
+          <i-icon icon="lucide:blocks" class="text-base text-blue-500 shrink-0" />
           <div class="flex-1 min-w-0">
             <div class="flex items-center gap-1">
               <span class="text-[12px] font-medium">Vant 组件</span>

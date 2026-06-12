@@ -16,7 +16,9 @@
     "typescript",
     "vant",
     "pinia",
-    "tailwindcss"
+    "tailwindcss",
+    "pwa",
+    "i18n"
   ],
   "engines": {
     "node": ">= 22.21.1"
@@ -44,9 +46,11 @@
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
     "pinia": "^2.2.5",
+    "pinia-plugin-persistedstate": "^3.2.3",
     "tailwind-merge": "^3.5.0",
     "vant": "^4.9.8",
     "vue": "^3.5.12",
+    "vue-i18n": "^11.4.5",
     "vue-router": "^4.6.4"
   },
   "devDependencies": {
@@ -87,6 +91,7 @@
     "vite-plugin-cdn2": "^1.1.0",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-mock-dev-server": "^2.4.0",
+    "vite-plugin-pwa": "^1.3.0",
     "vite-plugin-svg-icons": "^2.0.1",
     "vite-plugin-vconsole": "^2.1.1",
     "vite-plugin-vue-devtools": "^8.1.2",

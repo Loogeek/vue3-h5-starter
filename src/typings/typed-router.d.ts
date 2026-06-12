@@ -79,6 +79,13 @@ declare module 'vue-router/auto-routes' {
       { all: ParamValue<false> },
       | never
     >,
+    '/docs/': RouteRecordInfo<
+      '/docs/',
+      '/docs',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/tools/': RouteRecordInfo<
       '/tools/',
       '/tools',
@@ -144,6 +151,12 @@ declare module 'vue-router/auto-routes' {
     'src/views/[...all].vue': {
       routes:
         | '/[...all]'
+      views:
+        | never
+    }
+    'src/views/docs/index.vue': {
+      routes:
+        | '/docs/'
       views:
         | never
     }

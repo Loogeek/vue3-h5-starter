@@ -12,6 +12,7 @@ import VueRouter from 'unplugin-vue-router/vite';
 import { defineConfig, loadEnv } from 'vite';
 import viteCompression from 'vite-plugin-compression';
 import { mockDevServerPlugin } from 'vite-plugin-mock-dev-server';
+import { VitePWA } from 'vite-plugin-pwa';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import { viteVConsole } from 'vite-plugin-vconsole';
 import VueDevTools from 'vite-plugin-vue-devtools';
@@ -105,6 +106,36 @@ export default defineConfig(({ command, mode }) => {
         targets: ['Android >= 7', 'Chrome >= 67', 'iOS >= 11'],
         additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
         renderLegacyChunks: true,
+      }),
+      VitePWA({
+        registerType: 'autoUpdate',
+        injectRegister: 'auto',
+        includeAssets: ['favicon.ico', 'pwa.svg'],
+        manifest: {
+          name: 'Vue3 H5 Starter',
+          short_name: 'H5 Starter',
+          description: 'A mobile web app starter based on Vue 3.',
+          lang: 'zh-CN',
+          start_url: '/',
+          scope: '/',
+          display: 'standalone',
+          orientation: 'portrait',
+          background_color: '#f6f8f5',
+          theme_color: '#243b2f',
+          icons: [
+            {
+              src: 'pwa.svg',
+              sizes: 'any',
+              type: 'image/svg+xml',
+              purpose: 'any maskable',
+            },
+          ],
+        },
+        workbox: {
+          cleanupOutdatedCaches: true,
+          globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
+          navigateFallback: '/index.html',
+        },
       }),
     ].filter(Boolean),
     resolve: {

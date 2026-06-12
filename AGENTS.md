@@ -29,6 +29,8 @@
 | UI 组件库 | Vant | 4.x |
 | CSS 框架 | Tailwind CSS | 4.x |
 | 数据请求 | TanStack Query | 5.x |
+| 国际化 | Vue I18n | 11.x |
+| PWA | vite-plugin-pwa | 1.x |
 | 工具函数 | VueUse | 14.x |
 | 包管理器 | pnpm | - |
 | Node.js | - | >= 22.21.1 |
@@ -43,6 +45,7 @@ src/
 ├── composables/  # Composable hooks（含 TanStack Query hooks）
 ├── enums/        # 枚举类型定义
 ├── hooks/        # 自定义 Composition API hooks
+├── locales/      # 国际化语言包
 ├── layout/       # 布局组件
 ├── plugins/      # 插件配置（TanStack Query 等）
 ├── router/       # 路由配置
@@ -63,6 +66,7 @@ src/
 - `src/views/(home)/index.vue` → `/`（括号分组不参与 URL）
 - `src/views/(home)/query/[id].vue` → `/query/:id`（动态参数）
 - `src/views/(home)/routes/[slug].vue` → `/routes/:slug`（动态参数）
+- `src/views/docs/index.vue` → `/docs`
 - `src/views/tools/index.vue` → `/tools`
 - `src/views/**/components/` 目录不会生成路由
 

@@ -1,16 +1,22 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 const active = ref(0);
-const tabbarData = reactive([
+const tabbarData = computed(() => [
   {
     icon: 'wap-home-o',
-    title: '主页',
+    title: t('nav.home'),
     to: '/',
   },
   {
+    icon: 'description-o',
+    title: t('nav.docs'),
+    to: '/docs',
+  },
+  {
     icon: 'gem-o',
-    title: '工具',
+    title: t('nav.tools'),
     to: '/tools',
   },
 ]);
@@ -19,8 +25,8 @@ const tabbarData = reactive([
 <template>
   <van-tabbar v-model="active" :placeholder="true" :route="true" fixed>
     <van-tabbar-item
-      v-for="(item, index) in tabbarData"
-      :key="index"
+      v-for="item in tabbarData"
+      :key="item.to"
       :icon="item.icon"
       :to="item.to"
     >

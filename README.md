@@ -29,6 +29,9 @@ Recommended GitHub description:
 - Vant 4 mobile UI components
 - Tailwind CSS v4 with `px` to `vmin` viewport adaptation
 - Pinia for client state and TanStack Query for server state
+- Pinia persisted preferences for language and app settings
+- Vue I18n with Chinese and English messages
+- PWA manifest and service worker support
 - Axios wrapper, request examples, and mock API support
 - Dark mode, local SVG icons, and Iconify icons
 - VConsole, Vue DevTools, and Code Inspector for development
@@ -57,8 +60,11 @@ The project includes `netlify.toml`, so Netlify can build it with `pnpm build` a
 
 - [Vue Router](https://router.vuejs.org/) with file-based routing
 - [Pinia](https://pinia.vuejs.org/) for state management
+- [Vue I18n](https://vue-i18n.intlify.dev/) for localization
 - [TanStack Query](https://tanstack.com/query/latest/docs/framework/vue/overview) for server state
 - [VueUse](https://vueuse.org/) composition utilities
+- [vite-plugin-pwa](https://vite-pwa-org.netlify.app/) for PWA assets and service worker
+- [pinia-plugin-persistedstate](https://prazdevs.github.io/pinia-plugin-persistedstate/) for persisted stores
 - [vite-plugin-mock-dev-server](https://vite-plugin-mock-dev-server.netlify.app/) for local mock APIs
 - `vite-plugin-vconsole`, `vite-plugin-vue-devtools`, `vite-plugin-compression`, and `@vitejs/plugin-legacy`
 
@@ -116,6 +122,7 @@ pnpm preview
 - `/query` - TanStack Query list/detail/create flow
 - `/routes` - file-based routes and dynamic route params
 - `/scroll-cache` - keep-alive list scroll restoration
+- `/docs` - template docs, commands, capabilities, and next steps
 - `/tools` - icons, dark mode, AI workflow, and development tools
 
 ### Checks
