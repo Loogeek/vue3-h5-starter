@@ -4,6 +4,7 @@
   "version": "0.0.3",
   "description": "A Vue 3 mobile H5 starter template with Vite 8, Tailwind CSS v4, Vant 4, Pinia, TanStack Query, built-in examples, and AI-ready conventions.",
   "license": "MIT",
+  "homepage": "https://vue3-h5-starter.netlify.app",
   "keywords": [
     "vue",
     "vue3",

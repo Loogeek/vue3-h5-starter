@@ -27,3 +27,4 @@ coverage
 
 /src/typings/components.d.ts
 .omx/
+.netlify/

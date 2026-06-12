@@ -9,6 +9,8 @@
 [![repo size](https://img.shields.io/github/repo-size/Loogeek/vue3-h5-starter)](https://github.com/Loogeek/vue3-h5-starter)
 [![issues](https://img.shields.io/github/issues/Loogeek/vue3-h5-starter)](https://github.com/Loogeek/vue3-h5-starter/issues)
 
+[预览](https://vue3-h5-starter.netlify.app) / [仓库](https://github.com/Loogeek/vue3-h5-starter)
+
 ## 项目介绍
 
 `vue3-h5-starter` 是一个面向移动端 H5 项目的 Vue 3 脚手架。它把移动端项目常用的基础能力放在一起：路由、状态管理、服务端数据请求、本地 Mock、移动端组件、视口适配、开发调试工具，以及方便 AI 协作的项目规范。
@@ -37,6 +39,8 @@
 ## 官网
 
 首页位于 `/`，直接使用项目源码构建。它会介绍模板定位、展示技术栈、跳转 GitHub 仓库，并提供内置示例入口。
+
+预览地址：<https://vue3-h5-starter.netlify.app>
 
 项目已包含 `netlify.toml`，Netlify 可以使用 `pnpm build` 构建，并发布 `dist/`。
 

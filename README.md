@@ -9,6 +9,8 @@ A Vue 3 mobile H5 starter template for mobile web apps, WeChat pages, and hybrid
 [![repo size](https://img.shields.io/github/repo-size/Loogeek/vue3-h5-starter)](https://github.com/Loogeek/vue3-h5-starter)
 [![issues](https://img.shields.io/github/issues/Loogeek/vue3-h5-starter)](https://github.com/Loogeek/vue3-h5-starter/issues)
 
+[Preview](https://vue3-h5-starter.netlify.app) / [Repository](https://github.com/Loogeek/vue3-h5-starter)
+
 ## Project Overview
 
 `vue3-h5-starter` is a practical starter for building mobile H5 applications with Vue 3. It packages the usual foundation of a mobile project: routing, state management, server-state requests, mock APIs, mobile UI components, viewport adaptation, development debugging tools, and project conventions for AI-assisted coding.
@@ -37,6 +39,8 @@ Recommended GitHub description:
 ## Website
 
 The homepage lives at `/` and is built from the same app source. It introduces the template, lists the stack, links to the GitHub repository, and opens the bundled examples.
+
+Preview: <https://vue3-h5-starter.netlify.app>
 
 The project includes `netlify.toml`, so Netlify can build it with `pnpm build` and publish `dist/`.
 
