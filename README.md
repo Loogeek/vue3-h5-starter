@@ -9,9 +9,19 @@ A Vue 3 mobile H5 starter template for mobile web apps, WeChat pages, and hybrid
 [![repo size](https://img.shields.io/github/repo-size/Loogeek/vue3-h5-starter)](https://github.com/Loogeek/vue3-h5-starter)
 [![issues](https://img.shields.io/github/issues/Loogeek/vue3-h5-starter)](https://github.com/Loogeek/vue3-h5-starter/issues)
 
+## Project Overview
+
+`vue3-h5-starter` is a practical starter for building mobile H5 applications with Vue 3. It packages the usual foundation of a mobile project: routing, state management, server-state requests, mock APIs, mobile UI components, viewport adaptation, development debugging tools, and project conventions for AI-assisted coding.
+
+The root route is also a project homepage. It can be deployed directly as a public site, while the built-in examples show common flows such as request caching, dynamic routes, scroll restoration, dark mode, icons, and development tools.
+
+Recommended GitHub description:
+
+> A Vue 3 mobile H5 starter template with Vite 8, Tailwind CSS v4, Vant 4, Pinia, TanStack Query, built-in examples, and AI-ready conventions.
+
 ## Features
 
-- Vue 3.5, Vite 7, TypeScript, and pnpm
+- Vue 3.5, Vite 8, TypeScript, and pnpm
 - File-based routing powered by `unplugin-vue-router`
 - APIs and components auto importing
 - Vant 4 mobile UI components
@@ -22,6 +32,13 @@ A Vue 3 mobile H5 starter template for mobile web apps, WeChat pages, and hybrid
 - VConsole, Vue DevTools, and Code Inspector for development
 - Vitest, Vue Test Utils, and happy-dom test setup
 - AI collaboration entry files for Codex, Claude Code, Cursor, and GitHub Copilot
+- Homepage-style project site with built-in example entries
+
+## Website
+
+The homepage lives at `/` and is built from the same app source. It introduces the template, lists the stack, links to the GitHub repository, and opens the bundled examples.
+
+The project includes `netlify.toml`, so Netlify can build it with `pnpm build` and publish `dist/`.
 
 ## Pre-packed
 
@@ -82,11 +99,20 @@ pnpm dev
 pnpm build
 ```
 
+The build output is a static site in `dist/`. A minimal `netlify.toml` is included, so it can be deployed to Netlify as a single-page app.
+
 ### Preview
 
 ```bash
 pnpm preview
 ```
+
+## Built-in Examples
+
+- `/query` - TanStack Query list/detail/create flow
+- `/routes` - file-based routes and dynamic route params
+- `/scroll-cache` - keep-alive list scroll restoration
+- `/tools` - icons, dark mode, AI workflow, and development tools
 
 ### Checks
 

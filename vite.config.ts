@@ -25,6 +25,7 @@ const autoImportInclude = [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/];
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, root, '');
   const proxyTarget = env.VITE_PROXY_TARGET;
+  const devApiProxyTarget = proxyTarget || 'http://127.0.0.1';
 
   return {
     base: env.VITE_PUBLIC_PATH || '/',
@@ -113,22 +114,19 @@ export default defineConfig(({ command, mode }) => {
     },
     server: {
       host: true,
-      proxy: proxyTarget
-        ? {
-            '^/dev-api': {
-              target: proxyTarget,
-              ws: false,
-              changeOrigin: true,
-            },
-          }
-        : undefined,
+      proxy: {
+        '^/dev-api': {
+          target: devApiProxyTarget,
+          ws: false,
+          changeOrigin: true,
+        },
+      },
     },
     build: {
-      minify: 'terser',
       modulePreload: {
         polyfill: false,
       },
-      rollupOptions: {
+      rolldownOptions: {
         output: {
           chunkFileNames: 'static/js/[name]-[hash].js',
           entryFileNames: 'static/js/[name]-[hash].js',

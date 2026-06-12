@@ -9,9 +9,19 @@
 [![repo size](https://img.shields.io/github/repo-size/Loogeek/vue3-h5-starter)](https://github.com/Loogeek/vue3-h5-starter)
 [![issues](https://img.shields.io/github/issues/Loogeek/vue3-h5-starter)](https://github.com/Loogeek/vue3-h5-starter/issues)
 
+## 项目介绍
+
+`vue3-h5-starter` 是一个面向移动端 H5 项目的 Vue 3 脚手架。它把移动端项目常用的基础能力放在一起：路由、状态管理、服务端数据请求、本地 Mock、移动端组件、视口适配、开发调试工具，以及方便 AI 协作的项目规范。
+
+项目根路径同时也是官网首页。这个首页可以直接部署成公开站点，内置示例覆盖请求缓存、动态路由、列表滚动恢复、深色模式、图标和开发工具等常见场景。
+
+推荐填写到 GitHub About 的描述：
+
+> A Vue 3 mobile H5 starter template with Vite 8, Tailwind CSS v4, Vant 4, Pinia, TanStack Query, built-in examples, and AI-ready conventions.
+
 ## 特性
 
-- Vue 3.5、Vite 7、TypeScript、pnpm
+- Vue 3.5、Vite 8、TypeScript、pnpm
 - 基于 `unplugin-vue-router` 的文件路由
 - API 自动导入和组件自动注册
 - Vant 4 移动端组件库
@@ -22,6 +32,13 @@
 - VConsole、Vue DevTools、Code Inspector 开发调试工具
 - Vitest、Vue Test Utils、happy-dom 测试配置
 - 面向 Codex、Claude Code、Cursor、GitHub Copilot 的 AI 协作入口文件
+- 官网式首页和内置示例入口
+
+## 官网
+
+首页位于 `/`，直接使用项目源码构建。它会介绍模板定位、展示技术栈、跳转 GitHub 仓库，并提供内置示例入口。
+
+项目已包含 `netlify.toml`，Netlify 可以使用 `pnpm build` 构建，并发布 `dist/`。
 
 ## 内置能力
 
@@ -82,11 +99,20 @@ pnpm dev
 pnpm build
 ```
 
+构建产物位于 `dist/`。项目已内置最小 `netlify.toml`，可作为单页应用部署到 Netlify。
+
 ### 预览
 
 ```bash
 pnpm preview
 ```
+
+## 内置示例
+
+- `/query` - TanStack Query 列表、详情、创建流程
+- `/routes` - 文件路由和动态路由参数
+- `/scroll-cache` - keep-alive 列表滚动恢复
+- `/tools` - 图标、深色模式、AI 协作和开发工具
 
 ### 检查
 
