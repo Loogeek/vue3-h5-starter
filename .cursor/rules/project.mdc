@@ -1,0 +1,26 @@
+---
+description: Vue3 H5 脚手架项目规范，所有代码生成和修改必须遵循
+globs:
+alwaysApply: true
+---
+
+# Cursor 项目规范
+
+> 项目规范定义在根目录 `AGENTS.md` 中，请以 `AGENTS.md` 为准。
+> 行为边界与安全规则定义在根目录 `CONSTITUTION.md` 中，请一并遵循。
+> 本文件作为 Cursor 的入口指引，确保 Cursor 加载项目上下文。
+>
+> 最后更新：2026-04
+
+## 规范来源
+
+所有项目规范（技术栈、目录结构、编码规范、Agent 定义等）统一维护在 `AGENTS.md` 中。
+行为约束、安全红线、需确认操作统一维护在 `CONSTITUTION.md` 中。
+
+请在开始任何任务前，先阅读根目录的 `AGENTS.md` 和 `CONSTITUTION.md` 获取完整的项目上下文。
+
+## Cursor 特有说明
+
+- 本项目已配置 `unplugin-auto-import`，Vue / VueUse / Pinia / TanStack Query / Vant 等 API 无需手动导入
+- Vant 组件在模板中直接使用，无需注册
+- 文件路由由 `unplugin-vue-router` 自动生成，新页面放在 `src/views/` 下即可
